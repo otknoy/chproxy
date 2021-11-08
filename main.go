@@ -14,6 +14,8 @@ func main() {
 	}
 
 	modifier := func(res *http.Response) error {
+		log.Printf("%#v\n", res)
+
 		s := "sample"
 
 		res.Body = io.NopCloser(strings.NewReader("sample"))
