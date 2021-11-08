@@ -18,7 +18,7 @@ func main() {
 
 		s := "sample"
 
-		res.Body = io.NopCloser(strings.NewReader("sample"))
+		res.Body = io.NopCloser(strings.NewReader(s))
 		res.ContentLength = int64(len(s))
 
 		return nil
