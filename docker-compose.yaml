@@ -1,0 +1,6 @@
+version: '3'
+services:
+  chproxy:
+    build: .
+    ports:
+      - 9001:9000
