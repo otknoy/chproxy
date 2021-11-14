@@ -1,7 +1,7 @@
 package main
 
 import (
-	"chproxy/proxy"
+	"chproxy/app/proxy"
 	"log"
 )
 

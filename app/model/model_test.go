@@ -1,7 +1,7 @@
 package model_test
 
 import (
-	"chproxy/model"
+	"chproxy/app/model"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
