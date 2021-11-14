@@ -1,5 +1,7 @@
 package model
 
+import "strings"
+
 type Thread struct {
 	Title   string
 	ResList []Res
@@ -31,5 +33,7 @@ func (t *Thread) ToDat() (dat string) {
 }
 
 func (r *Res) ToDatRow() string {
-	return r.Name + "<>" + r.EMail + "<>" + r.Date + "ID:" + r.ID + "<>" + r.Text + "<>"
+	text := strings.ReplaceAll(r.Text, "\n", "<br>")
+
+	return r.Name + "<>" + r.EMail + "<>" + r.Date + "ID:" + r.ID + "<>" + text + "<>"
 }
