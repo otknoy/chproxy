@@ -33,7 +33,7 @@ func (t *Thread) ToDat() (dat string) {
 }
 
 func (r *Res) ToDatRow() string {
-	text := strings.ReplaceAll(r.Text, "\n", "<br>")
+	text := strings.ReplaceAll(r.Text, "\n", " <br> ")
 
 	return r.Name + "<>" + r.EMail + "<>" + r.Date + "ID:" + r.ID + "<>" + text + "<>"
 }
