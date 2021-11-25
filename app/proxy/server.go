@@ -1,6 +1,7 @@
 package proxy
 
 import (
+	"chproxy/app/converter"
 	"log"
 	"net/http"
 	"net/http/httputil"
@@ -23,6 +24,8 @@ func NewServer() *http.Server {
 
 func NewDirectory() func(*http.Request) {
 	return func(req *http.Request) {
+		req.URL.Path = converter.ConvertRequestPath(req.URL.Path)
+
 		log.Printf("%#v\n", req)
 	}
 }
