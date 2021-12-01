@@ -24,12 +24,12 @@ func ConvertResponse(html io.Reader) (dat io.Reader) {
 			return strings.TrimPrefix(s, "mailto:")
 		}()
 
+		date := s.Find("div.meta > span.date").Text()
+
 		id := strings.TrimPrefix(
 			s.Find("div.meta > span.uid").Text(),
 			"ID:",
 		)
-
-		date := s.Find("div.meta > span.date").Text()
 
 		text := func() string {
 			t, _ := s.Find("div.message > span.escaped").Html()
