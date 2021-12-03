@@ -12,6 +12,7 @@ type Res struct {
 	EMail string
 	Date  string
 	ID    string
+	BE    string
 	Text  string
 }
 
@@ -35,5 +36,10 @@ func (t *Thread) ToDat() (dat string) {
 func (r *Res) ToDatRow() string {
 	text := strings.ReplaceAll(r.Text, "\n", " <br> ")
 
-	return r.Name + "<>" + r.EMail + "<>" + r.Date + " ID:" + r.ID + "<>" + text + "<>"
+	be := ""
+	if r.BE != "" {
+		be = " BE:" + r.BE
+	}
+
+	return r.Name + "<>" + r.EMail + "<>" + r.Date + " ID:" + r.ID + be + "<>" + text + "<>"
 }
