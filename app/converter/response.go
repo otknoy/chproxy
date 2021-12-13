@@ -31,6 +31,13 @@ func ConvertResponse(html io.Reader) (dat io.Reader) {
 			"ID:",
 		)
 
+		be := func() string {
+			s, _ := s.Find("div.meta > span.be > a").Attr("href")
+			t := strings.Split(s, "/")
+
+			return t[len(t)-1]
+		}()
+
 		text := func() string {
 			t, _ := s.Find("div.message > span.escaped").Html()
 
@@ -52,6 +59,7 @@ func ConvertResponse(html io.Reader) (dat io.Reader) {
 				EMail: email,
 				Date:  date,
 				ID:    id,
+				BE:    be,
 				Text:  text,
 			},
 		)
