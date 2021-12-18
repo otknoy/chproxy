@@ -28,8 +28,6 @@ func (t *Thread) ToDat() (dat string) {
 		dat += row + "\n"
 	}
 
-	dat += "あぼーん<>あぼーん<>あぼーん<>あぼーん<>\n"
-
 	return dat
 }
 
