@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"net/http/httputil"
+	"strings"
 )
 
 func NewServer() *http.Server {
@@ -27,24 +28,34 @@ func NewDirectory() func(*http.Request) {
 	return func(req *http.Request) {
 		// log.Printf("%#v\n", req.URL)
 
-		req.URL.Scheme = "http"
-		req.URL.Path = converter.ConvertRequestPath(req.URL.Path)
+		if datRequest(req) {
+			req.URL.Scheme = "http"
+			req.URL.Path = converter.ConvertRequestPath(req.URL.Path)
 
-		log.Printf("%#v\n", req)
+			log.Printf("%#v\n", req)
+		}
 	}
 }
 
 func NewModifyResponse() func(*http.Response) error {
 	return func(res *http.Response) error {
-		res.Body = io.NopCloser(converter.ConvertResponse(res.Body))
+		log.Printf("%#v\n", res)
+		log.Printf("%#v\n", res.Request.URL.String())
 
-		// log.Printf("%#v\n", res)
+		if datProxyRequest(res.Request) {
+			res.Body = io.NopCloser(converter.ConvertResponse(res.Body))
 
-		// s := "sample"
-
-		// res.Body = io.NopCloser(strings.NewReader(s))
-		// res.ContentLength = int64(len(s))
+			log.Printf("%#v\n", res)
+		}
 
 		return nil
 	}
+}
+
+func datRequest(req *http.Request) bool {
+	return strings.HasSuffix(req.URL.Host, "5ch.net") && strings.HasSuffix(req.URL.Path, ".dat")
+}
+
+func datProxyRequest(req *http.Request) bool {
+	return strings.HasSuffix(req.URL.Host, "5ch.net") && strings.HasPrefix(req.URL.Path, "/test/read.cgi/")
 }
